@@ -78,7 +78,6 @@ cd <code path aksmeetup>
 dotnet build
 
 # Create the image
-cd AksTestFrontend
 docker build . -t meetup/aksmeetup:dev
 
 
