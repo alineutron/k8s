@@ -3,12 +3,12 @@
 ## Install a Aks cluster
 **Note:** Should run commands in a Azure cloud PowerShell
 ```powershell
-$subscriptionid = '8b2ebf84-151c-4f50-a5c2-cfcbe4c779b5'
-$aksClusterName = 'akspostmeetup01'
-$aksClusterResourceGroup = 'akspostmeetup01'
+$subscriptionid = ''
+$aksClusterName = 'akmeetup01'
+$aksClusterResourceGroup = 'akmeetup01'
 $nodeCount = '1'
 $resourceGroupLocation = 'westeurope'
-$acrName = 'akspostmeetup01acr01'
+$acrName = 'acrmeetup01'
 $sku = 'basic'
 
 az login
@@ -72,37 +72,21 @@ az aks list --resource-group $aksClusterResourceGroup
 ```powershell
 docker images
 
-cd <Path to solution of AksTest>
+cd <code path aksmeetup>
 
 # Run in the directory where the code is
 dotnet build
 
 # Create the image
 cd AksTestFrontend
-docker build . -t xinfli/akstestfrontend:dev
+docker build . -t meetup/aksmeetup:dev
 
-cd ..\AksTestBackend
-docker build . -t xinfli/akstestbackend:dev
 
-# Start docker
-cd ..
-docker run -p 8081:80 `
-           --name AksTest_Backend `
-           -e Options__FrontendApiEndpoint=http://localhost:8082/api/Message/SendMessage `
-           xinfli/akstestbackend:dev
-
-# Parameter below can be added for debugging
-# -e ASPNETCORE_ENVIRONMENT=Development `
-
-docker run -p 8082:80 `
-           --name AksTest_Frontend `
-           xinfli/akstestfrontend:dev
 ```
 
 ## Push image to acr
 **Note:** Should run commands in a local PowerShell
 ```powershell
-$acrName = 'xlcr01'
 
 # Its a cli on the docker login command
 az acr login --name $acrName
@@ -116,16 +100,12 @@ az acr repository list --name $acrName
 # Show all local images
 docker image list
 # Tag image
-docker tag xinfli/akstestbackend:dev xlcr01.azurecr.io/xfdemo/akstestbackend:v1
+docker tag meetup/aksmeetup:dev akspostmeetup01acr01.azurecr.io/aksmeetup:v1
 # Show updated local images
 docker image list
 # Push image to new created acr
-docker push xlcr01.azurecr.io/xfdemo/akstestbackend:v1
+docker push akspostmeetup01acr01.azurecr.io/aksmeetup:v1
 
-docker image list
-docker tag xinfli/akstestfrontend:dev xlcr01.azurecr.io/xfdemo/akstestfrontend:v1
-docker image list
-docker push xlcr01.azurecr.io/xfdemo/akstestfrontend:v1
 
 az acr repository list -n $acrName -o table
 ```
