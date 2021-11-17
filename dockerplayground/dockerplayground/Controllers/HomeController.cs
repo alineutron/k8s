@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace dockerplayground.Controllers
 {
@@ -20,10 +21,17 @@ namespace dockerplayground.Controllers
 
         public IActionResult Index()
         {
-            if (!System.IO.File.Exists("c:/storage/playground.txt"))
+            var filePath = "c:/storage/playground.txt";
+            if (!System.IO.File.Exists(filePath))
             {
                 System.IO.Directory.CreateDirectory("c:/storage/");
-                System.IO.File.Create("c:/storage/playground.txt");
+                var fs = System.IO.File.Create(filePath);
+                fs.Close();
+                System.IO.File.WriteAllText(filePath, "I just created the file");
+            }
+            else
+            {
+                System.IO.File.WriteAllText(filePath, "The file is already created");
             }
             return View();
         }
