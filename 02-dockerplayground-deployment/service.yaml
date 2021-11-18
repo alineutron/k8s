@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dockerplay-service
+spec:
+  selector:
+    app: dockerplay
+  ports:
+    - port: 80
+  type: NodePort
