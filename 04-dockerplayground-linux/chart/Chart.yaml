@@ -1,0 +1,4 @@
+apiVersion: v1
+description: helm chart for docker playground
+name: dockerplayground
+version: 0.1.0

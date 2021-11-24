@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dockerplay-deployment
+  labels:
+    app: dockerplay
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: dockerplay
+      labels:
+        app: dockerplay
+    spec:
+      containers:
+        - name: dockerplay
+          image: alineutron/dockerplayground:dev
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: dockerplay

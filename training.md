@@ -75,7 +75,7 @@ req: kubectl,helm,docker must be installed
 
 
 
-Exercise 4- Linux containers with helm
+# Exercise 4- Linux containers with helm
 
 Name: 04-dockerplayground-linux
 
@@ -85,9 +85,21 @@ OS: linux
 
 req: kubectl,helm,docker,minikube
 
+##### Commands
+
+1. cd .\04-dockerplayground-linux\
+2. cd .\dockerplayground\
+3. dotnet build
+4. dotnet run
+5. docker build . -t alineutron/dockerplayground:dev
+6. docker push alineutron/dockerplayground:dev
+7. helm install dockerplayground ./chart
 
 
-Exercise 9- pipeline to create aks cluster
+
+
+
+Exercise 5- pipeline to create aks cluster
 
 Name: 
 
@@ -204,6 +216,32 @@ req: kubectl,helm,docker,minikube
 
 
 Exercise 9- Linux containers-build code using pipeline
+
+Name: 
+
+Git: https://github.com/alineutron/k8s
+
+OS: linux
+
+req: kubectl,helm,docker,minikube
+
+
+
+
+
+Exercise 9- Linux containers-azure conatiner services
+
+Name: 
+
+Git: https://github.com/alineutron/k8s
+
+OS: linux
+
+req: kubectl,helm,docker,minikube
+
+
+
+Exercise 9- Linux containers-connect to one of the VM
 
 Name: 
 
